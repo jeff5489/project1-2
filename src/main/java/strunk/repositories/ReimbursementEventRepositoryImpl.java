@@ -32,7 +32,8 @@ public class ReimbursementEventRepositoryImpl implements ReimbursementEventRepos
 				event.setEmployeeId(rs.getInt("employeeId"));
 //				event.setRequestId(rs.getInt("requestId"));
 				event.setType(rs.getString("type"));
-				event.setLocation(rs.getString("location"));
+				event.setLocationState(rs.getString("locationState"));
+				event.setLocationCity(rs.getString("locationCity"));
 				event.setStartDate(rs.getString("startDate"));
 				event.setEndDate(rs.getString("endDate"));
 				event.setCost(rs.getDouble("cost"));
@@ -95,21 +96,24 @@ public class ReimbursementEventRepositoryImpl implements ReimbursementEventRepos
 //			private Double cost;
 //			private String gradingFormat;
 			
-			String sql = "INSERT into reimbursementEvents values (reimbursementEvents_seq.nextval ,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT into reimbursementEvents (id, employeeId, type, locationState, locationCity, description, startDate, "
+					+ "endDate, cost, gradingFormatId, passingGrade)"
+					+ "values (reimbursementEvents_seq.nextval ,?,?,?,?,?,?,?,?,?,?)";
+		    
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, event.getEmployeeId());
-//			ps.setInt(2, event.getRequestId());
 			ps.setString(2, event.getType());
-			ps.setString(3, event.getLocation());
-			ps.setString(4, event.getDescription());
-			ps.setString(5, event.getStartDate());
-			ps.setString(6, event.getEndDate());
-			ps.setDouble(7, event.getCost());
-			ps.setString(8, event.getGradingFormat());
-			ps.setString(9, event.getPassingGrade());
+			ps.setString(3, event.getLocationState());
+			ps.setString(4, event.getLocationCity());
+			ps.setString(5, event.getDescription());
+			ps.setString(6, event.getStartDate());
+			ps.setString(7, event.getEndDate());
+			ps.setDouble(8, event.getCost());
+			ps.setString(9, event.getGradingFormat());
+			ps.setString(10, event.getPassingGrade());
 
 			ps.execute();
-			conn.close();
+//			conn.close();
 			return true;
 
 		} catch (SQLException e) {
@@ -131,24 +135,14 @@ public class ReimbursementEventRepositoryImpl implements ReimbursementEventRepos
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				
-//				private int id;
-//				private int employeeId;
-//				private int requestId;
-//				private String type;
-//				private String location;
-//				private String description;
-//				private String startDate;
-//				private String endDate;
-//				private Double cost;
-//				private String gradingFormat;
 
 				ReimbursementEvent event = new ReimbursementEvent();
 				event.setId(rs.getInt("id"));
 				event.setEmployeeId(rs.getInt("employeeId"));
 //				event.setRequestId(rs.getInt("requestId"));
 				event.setType(rs.getString("type"));
-				event.setLocation(rs.getString("location"));
+				event.setLocationState(rs.getString("locationState"));
+				event.setLocationCity(rs.getString("locationCity"));
 				event.setStartDate(rs.getString("startDate"));
 				event.setEndDate(rs.getString("endDate"));
 				event.setCost(rs.getDouble("cost"));
@@ -184,9 +178,13 @@ public class ReimbursementEventRepositoryImpl implements ReimbursementEventRepos
 		List<ReimbursementEvent> events = new ArrayList<ReimbursementEvent>();
 		
 		try {
-
+//			conn.setNetworkTimeout(null, 6000);
+			System.out.println("conn.getNetworkTimeout: " + conn.getNetworkTimeout());
+//			conn.getNetworkTimeout();
+			
 			String sql = "SELECT * FROM reimbursementEvents ORDER BY id DESC";
 			PreparedStatement ps = conn.prepareStatement(sql);
+//			pool.setValidateConnectionOnBorrow(true);
 
 			ResultSet rs = ps.executeQuery();
 
@@ -200,7 +198,7 @@ public class ReimbursementEventRepositoryImpl implements ReimbursementEventRepos
 			}
 
 			int id = events.get(0).getId();
-			conn.close();
+//			conn.close();
 			return id;
 
 		} catch (SQLException e) {

@@ -110,7 +110,7 @@ public class ReimbursementRequestRepositoryImpl implements ReimbursementRequestR
 			ps.setInt(9, isDepartmentHeadApproved);
 
 			ps.execute();
-			conn.close();
+//			conn.close();
 			return true;
 
 		} catch (SQLException e) {

@@ -32,6 +32,8 @@ public class LogInController extends HttpServlet {
 //		PrintWriter out = response.getWriter();
 //        out.print(username + " " + password);
 		
+//		System.out.println("Log in controller reached");
+		
 		LogInService logInService = new LogInService();
 		
 		if(logInService.logIn(request)) {

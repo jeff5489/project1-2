@@ -18,7 +18,7 @@ public class FormController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Form controller reached - Served at: ").append(request.getContextPath());
+		response.getWriter().append("Form controller reached - Served at: ");
 //		HttpSession session=request.getSession(); 
 //		System.out.println("service sess username: " + session.getAttribute("username"));
 //		System.out.println("service sess password: " + session.getAttribute("password"));

@@ -8,7 +8,8 @@ public class ReimbursementEvent {
 	private int employeeId;
 //	private int requestId;
 	private String type;
-	private String location;
+	private String locationState;
+	private String locationCity;
 	private String description;
 	private String startDate;
 	private String endDate;
@@ -20,13 +21,14 @@ public class ReimbursementEvent {
 		super();
 	}
 
-	public ReimbursementEvent(int employeeId, String type, String location, String description,
-			String startDate, String endDate, Double cost, String gradingFormat, String passingGrade) {
+	public ReimbursementEvent(int employeeId, String type, String locationState, String locationCity,
+			String description, String startDate, String endDate, Double cost, String gradingFormat,
+			String passingGrade) {
 		super();
 		this.employeeId = employeeId;
-//		this.requestId = requestId;
 		this.type = type;
-		this.location = location;
+		this.locationState = locationState;
+		this.locationCity = locationCity;
 		this.description = description;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -34,6 +36,8 @@ public class ReimbursementEvent {
 		this.gradingFormat = gradingFormat;
 		this.passingGrade = passingGrade;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -59,12 +63,23 @@ public class ReimbursementEvent {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getLocation() {
-		return location;
+
+	public String getLocationState() {
+		return locationState;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+
+	public void setLocationState(String locationState) {
+		this.locationState = locationState;
 	}
+
+	public String getLocationCity() {
+		return locationCity;
+	}
+
+	public void setLocationCity(String locationCity) {
+		this.locationCity = locationCity;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -102,11 +117,13 @@ public class ReimbursementEvent {
 	public void setPassingGrade(String passingGrade) {
 		this.passingGrade = passingGrade;
 	}
+
 	@Override
 	public String toString() {
-		return "ReimbursementEvents [id=" + id + ", employeeId=" + employeeId + ", type="
-				+ type + ", location=" + location + ", description=" + description + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", cost=" + cost + ", gradingFormat=" + gradingFormat + "]";
+		return "ReimbursementEvent [id=" + id + ", employeeId=" + employeeId + ", type=" + type + ", locationState="
+				+ locationState + ", locationCity=" + locationCity + ", description=" + description + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", cost=" + cost + ", gradingFormat=" + gradingFormat
+				+ ", passingGrade=" + passingGrade + "]";
 	}
 	
 }
